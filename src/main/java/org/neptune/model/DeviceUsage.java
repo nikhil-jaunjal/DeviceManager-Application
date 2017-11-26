@@ -26,11 +26,11 @@ public class DeviceUsage
 	@Column(name = "usage_end_date")
 	private Date endDate;
 
-	@ManyToOne/*(cascade = CascadeType.ALL)*/
+	@ManyToOne
 	@JoinColumn(name = "ref_user_id")
 	private UserEntity user;
 
-	@ManyToOne/*(cascade = CascadeType.ALL)*/
+	@ManyToOne
 	@JoinColumn(name = "ref_device_id")
 	private DeviceEntity device;
 

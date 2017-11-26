@@ -12,7 +12,6 @@ import org.neptune.repository.DeviceDAO;
 import org.neptune.repository.DeviceUsageDAO;
 import org.neptune.repository.UserDAO;
 import org.neptune.service.impl.DeviceUsageServiceInterface;
-import org.neptune.validator.DeviceDtoValidator;
 import org.neptune.validator.DeviceUsageDtoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +29,6 @@ public class DeviceUsageService implements DeviceUsageServiceInterface
 	private UserDAO userRepo;
 	@Autowired
 	private DeviceDAO deviceRepo;
-	@Autowired
-	private DeviceDtoValidator deviceDtoValidator;
 
 	@Override
 	public DeviceUsageDto save(DeviceUsageInputDto deviceUsageInDto)
@@ -47,12 +44,12 @@ public class DeviceUsageService implements DeviceUsageServiceInterface
 		deviceUsage.setUser(userEntity);
 		deviceUsage.setDevice(deviceEntity);
 		deviceUsageRepo.save(deviceUsage);
-		
+
 		deviceUsage = deviceUsageRepo.findOne(deviceUsage.getDeviceUsageId());
 		DeviceUsageDto deviceUsageDto = mapper.map(deviceUsage, DeviceUsageDto.class);
 		deviceUsageDto.setUserId(deviceUsage.getUser().getUserId());
 		deviceUsageDto.setDeviceId(deviceUsage.getDevice().getDeviceId());
-		
+
 		return deviceUsageDto;
 	}
 
@@ -82,7 +79,7 @@ public class DeviceUsageService implements DeviceUsageServiceInterface
 	@Override
 	public void delete(Integer id)
 	{
-		deviceDtoValidator.checkDeviceId(id);
+		validator.checkDeviceUsageId(id);
 		DeviceUsage deviceUsage = deviceUsageRepo.findOne(id);
 		validator.isEmptyEntity(deviceUsage);
 		deviceUsageRepo.delete(id);

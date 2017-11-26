@@ -131,7 +131,6 @@ public class DeviceService implements DeviceServiceInterface
 			deviceEntityList = deviceRepo.findByDeviceTypeAndState(type, state);
 		}
 		List<DeviceOutDto> deviceDtoList = new ArrayList<>();
-		validator.isEmptyEntityList(deviceEntityList);
 		for (DeviceEntity deviceEntity : deviceEntityList)
 		{
 			DeviceOutDto dto = mapper.map(deviceEntity, DeviceOutDto.class);
@@ -141,9 +140,9 @@ public class DeviceService implements DeviceServiceInterface
 		return deviceDtoList;
 	}
 
-	private String setEnumValueOfKey(Integer key)
+	public String setEnumValueOfKey(Integer key)
 	{
-		String value = null;
+		String value = "";
 		for (DeviceState s : DeviceState.values())
 		{
 			if (s.getKey() == key)
