@@ -27,14 +27,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class UserServiceTest
 {
+
+	@Autowired
+	UserDAO userDao;
+
+	@Autowired
+	private DeviceUsageDAO userDeviceDao;
+
 	@Autowired
 	UserService userService;
-
-	@Autowired
-	UserDAO userRepo;
-
-	@Autowired
-	private DeviceUsageDAO userDeviceRepo;
 
 	@Autowired
 	private DozerBeanMapper mapper;
@@ -62,6 +63,7 @@ public class UserServiceTest
 	// }
 
 	// --------------------negative tests for save()----------
+
 	@Test
 	public void saveUser_InvalidUserId_Test()
 	{
@@ -69,7 +71,7 @@ public class UserServiceTest
 
 		boolean flag = true;
 		UserInputDto userInputDto = userDataProvider.createDefaultInputDTForSaveFunction();
-		userInputDto.setUserId("6nnit124");
+		userInputDto.setUserId("67n*it124");
 		try
 		{
 			userService.save(userInputDto);
@@ -80,7 +82,7 @@ public class UserServiceTest
 			{
 			} else if (e instanceof Exception)
 			{
-				fail("Test failed - untracked condition or 'userId' already exists");
+				fail("Test failed - untracked condition or 'userId' already exists" + e.toString());
 			}
 		}
 		if (flag == false)
@@ -106,7 +108,7 @@ public class UserServiceTest
 			{
 			} else if (e instanceof Exception)
 			{
-				fail("Test failed - untracked condition");
+				fail("Test failed - untracked condition" + e.toString());
 			}
 		}
 		if (flag == false)
@@ -132,7 +134,7 @@ public class UserServiceTest
 			{
 			} else if (e instanceof Exception)
 			{
-				fail("Test failed - untracked condition");
+				fail("Test failed - untracked condition" + e.toString());
 			}
 		}
 		if (flag == false)
@@ -158,7 +160,7 @@ public class UserServiceTest
 			{
 			} else if (e instanceof Exception)
 			{
-				fail("Test failed - untracked condition");
+				fail("Test failed - untracked condition" + e.toString());
 			}
 		}
 		if (flag == false)
@@ -173,7 +175,7 @@ public class UserServiceTest
 		UserDataProvider userDataProvider = new UserDataProvider();
 		boolean flag = true;
 		UserInputDto userInputDto = userDataProvider.createDefaultInputDTForSaveFunction();
-		userInputDto.setUserType(90);
+		userInputDto.setUserType(-33);
 		try
 		{
 			userService.save(userInputDto);
@@ -184,7 +186,7 @@ public class UserServiceTest
 			{
 			} else if (e instanceof Exception)
 			{
-				fail("Test failed - untracked condition");
+				fail("Test failed - untracked condition" + e.toString());
 			}
 		}
 		if (flag == false)
@@ -196,7 +198,7 @@ public class UserServiceTest
 	@Test
 	public void saveUser_UserAlreadyExistsException_Test()
 	{
-		UserEntity userEntity = userRepo.findOne("nit9108067");
+		UserEntity userEntity = userDao.findOne("nit9108067");
 		if (userEntity != null)
 		{
 			fail("UserAlreadyExistsTest failed!");
@@ -209,7 +211,7 @@ public class UserServiceTest
 		UserDataProvider userDataProvider = new UserDataProvider();
 		UserInputDto userInputDto = userDataProvider.createDefaultInputDTForSaveFunction();
 		UserEntity userEntity = mapper.map(userInputDto, UserEntity.class);
-		userRepo.save(userEntity);
+		userDao.save(userEntity);
 		UserOutDto userOutDto = mapper.map(userEntity, UserOutDto.class);
 		userOutDto.setUserType(userService.setEnumValueOfKey(50));//
 
@@ -242,7 +244,7 @@ public class UserServiceTest
 	@Test
 	public void updateUser_UserDoesNotExistsException_Test()
 	{
-		UserEntity userEntity = userRepo.findOne("nit9108067");
+		UserEntity userEntity = userDao.findOne("nit9108067");
 		if (userEntity == null)
 		{
 		} else
@@ -270,7 +272,7 @@ public class UserServiceTest
 			{
 			} else if (e instanceof Exception)
 			{
-				fail("Test failed - untracked condition");
+				fail("Test failed - untracked condition" + e.toString());
 			}
 		}
 		if (flag == false)
@@ -297,7 +299,7 @@ public class UserServiceTest
 			{
 			} else if (e instanceof Exception)
 			{
-				fail("Test failed - untracked condition");
+				fail("Test failed - untracked condition" + e.toString());
 			}
 		}
 		if (flag == false)
@@ -324,7 +326,7 @@ public class UserServiceTest
 			{
 			} else if (e instanceof Exception)
 			{
-				fail("Test failed - untracked condition");
+				fail("Test failed - untracked condition" + e.toString());
 			}
 		}
 		if (flag == false)
@@ -351,7 +353,7 @@ public class UserServiceTest
 			{
 			} else if (e instanceof Exception)
 			{
-				fail("Test failed - untracked condition");
+				fail("Test failed - untracked condition" + e.toString());
 			}
 		}
 		if (flag == false)
@@ -393,7 +395,7 @@ public class UserServiceTest
 		UserDataProvider userDataProvider = new UserDataProvider();
 		UserInputDto userInputDto = userDataProvider.createDefaultInputDTForUpdateFunction();
 		UserEntity userEntity = mapper.map(userInputDto, UserEntity.class);
-		userRepo.save(userEntity);
+		userDao.save(userEntity);
 		UserOutDto userOutDto = mapper.map(userEntity, UserOutDto.class);
 		userOutDto.setUserType(userService.setEnumValueOfKey(404));//
 		if (userOutDto.getUserType().equals(""))
@@ -434,7 +436,7 @@ public class UserServiceTest
 			{
 			} else if (e instanceof Exception)
 			{
-				fail("Test failed - untracked condition or 'UserId' does not exits in database table");
+				fail("Test failed - untracked condition or 'UserId' does not exits in database table" + e.toString());
 			}
 		}
 		if (flag == false)
@@ -446,7 +448,7 @@ public class UserServiceTest
 	@Test
 	public void deleteUser_UserNotExistsException_Test()
 	{
-		UserEntity userEntity = userRepo.findOne("nit9108067");
+		UserEntity userEntity = userDao.findOne("nit9108067");
 		if (userEntity == null)
 		{
 		} else
@@ -524,7 +526,7 @@ public class UserServiceTest
 			{
 			} else
 			{
-				fail("Test Failed ! - valid userType given");
+				fail("Test Failed ! - valid userType given" + e.toString());
 			}
 		}
 	}
@@ -543,7 +545,7 @@ public class UserServiceTest
 			{
 			} else
 			{
-				fail("test failed! - valid 'UserId' given");
+				fail("test failed! - valid 'UserId' given" + e.toString());
 			}
 		}
 
@@ -552,7 +554,7 @@ public class UserServiceTest
 	@Test
 	public void findByUserId_UserEntityNull_Test()
 	{
-		UserEntity userEntity = userRepo.findOne("nit404");// id should not be present in db
+		UserEntity userEntity = userDao.findOne("nit404");// id should not be present in db
 		if (userEntity == null)
 		{
 		} else
@@ -575,7 +577,7 @@ public class UserServiceTest
 			{
 			} else
 			{
-				fail("test failed! - valid 'UserId' given");
+				fail("test failed! - valid 'UserId' given" + e.toString());
 			}
 		}
 	}
@@ -583,7 +585,7 @@ public class UserServiceTest
 	@Test
 	public void findDevicesOfUser_DataNotFoundException_Test()
 	{
-		List<DeviceUsage> deviceUsageList = userDeviceRepo.findByUserUserId("nit404"); // id must not be in db
+		List<DeviceUsage> deviceUsageList = userDeviceDao.findByUserUserId("nit404"); // id must not be in db
 		if (deviceUsageList.isEmpty())
 		{
 		} else

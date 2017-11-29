@@ -83,34 +83,42 @@ public class UserService implements UserServiceInterface
 	@Override
 	public List<UserOutDto> findUsers(String firstName, String lastName, Integer type)
 	{
-		validator.checkFirstName(firstName);
-		validator.checkLastName(lastName);
-		validator.checkUserType(type);
-
 		List<UserEntity> userEntityList;
 		if (firstName == null && lastName == null && type == null)
 		{
 			userEntityList = userRepo.findAll();
 		} else if (type == null && firstName != null && lastName != null)
 		{
+			validator.checkFirstName(firstName);
+			validator.checkLastName(lastName);
 			userEntityList = userRepo.findByFirstNameAndLastName(firstName, lastName);
 		} else if (type == null && firstName == null)
 		{
+			validator.checkLastName(lastName);
 			userEntityList = userRepo.findByLastName(lastName);
 		} else if (type != null && firstName == null && lastName == null)
 		{
+			validator.checkUserType(type);
 			userEntityList = userRepo.findByUserType(type);
 		} else if (type != null && firstName == null)
 		{
+			validator.checkUserType(type);
+			validator.checkLastName(lastName);
 			userEntityList = userRepo.findByUserTypeAndLastName(type, lastName);
 		} else if (type != null && lastName == null)
 		{
+			validator.checkFirstName(firstName);
+			validator.checkUserType(type);
 			userEntityList = userRepo.findByFirstNameAndUserType(firstName, type);
 		} else if (lastName == null)
 		{
+			validator.checkFirstName(firstName);
 			userEntityList = userRepo.findByFirstName(firstName);
 		} else
 		{
+			validator.checkFirstName(firstName);
+			validator.checkLastName(lastName);
+			validator.checkUserType(type);
 			userEntityList = userRepo.findByFirstNameAndLastNameAndUserType(firstName, lastName, type);
 		}
 		List<UserOutDto> userOutDtoList = new ArrayList<>();

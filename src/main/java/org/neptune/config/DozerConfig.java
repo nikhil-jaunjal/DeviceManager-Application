@@ -1,4 +1,4 @@
-package org.neptune;
+package org.neptune.config;
 
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;

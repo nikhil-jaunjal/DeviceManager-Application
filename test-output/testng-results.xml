@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="6" passed="6">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="557" started-at="2017-11-28T12:08:36Z" finished-at="2017-11-28T12:08:36Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="557" started-at="2017-11-28T12:08:36Z" finished-at="2017-11-28T12:08:36Z">
+      <class name="org.neptune.service.tests.TestNGDemo">
+        <test-method status="PASS" signature="initMocks()[pri:0, instance:org.neptune.service.tests.TestNGDemo@4566e5bd]" name="initMocks" is-config="true" duration-ms="503" started-at="2017-11-28T17:38:36Z" finished-at="2017-11-28T17:38:36Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initMocks -->
+        <test-method status="PASS" signature="save_UserAlreadyExistsException_Test(org.neptune.dto.UserInputDto, org.neptune.model.UserEntity)[pri:0, instance:org.neptune.service.tests.TestNGDemo@4566e5bd]" name="save_UserAlreadyExistsException_Test" duration-ms="16" started-at="2017-11-28T17:38:36Z" data-provider="dataProviderMethod2" finished-at="2017-11-28T17:38:36Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.neptune.dto.UserInputDto@68f1b17f]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.neptune.model.UserEntity@1722011b]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- save_UserAlreadyExistsException_Test -->
+        <test-method status="PASS" signature="initMocks()[pri:0, instance:org.neptune.service.tests.TestNGDemo@4566e5bd]" name="initMocks" is-config="true" duration-ms="1" started-at="2017-11-28T17:38:36Z" finished-at="2017-11-28T17:38:36Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initMocks -->
+        <test-method status="PASS" signature="save_invalidEmail_Test(org.neptune.dto.UserInputDto)[pri:0, instance:org.neptune.service.tests.TestNGDemo@4566e5bd]" name="save_invalidEmail_Test" duration-ms="1" started-at="2017-11-28T17:38:36Z" data-provider="dataProviderMethod1" finished-at="2017-11-28T17:38:36Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.neptune.dto.UserInputDto@7e19ebf0]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- save_invalidEmail_Test -->
+        <test-method status="PASS" signature="initMocks()[pri:0, instance:org.neptune.service.tests.TestNGDemo@4566e5bd]" name="initMocks" is-config="true" duration-ms="1" started-at="2017-11-28T17:38:36Z" finished-at="2017-11-28T17:38:36Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initMocks -->
+        <test-method status="PASS" signature="save_invalidFirstName_Test(org.neptune.dto.UserInputDto)[pri:0, instance:org.neptune.service.tests.TestNGDemo@4566e5bd]" name="save_invalidFirstName_Test" duration-ms="1" started-at="2017-11-28T17:38:36Z" data-provider="dataProviderMethod1" finished-at="2017-11-28T17:38:36Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.neptune.dto.UserInputDto@68f4865]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- save_invalidFirstName_Test -->
+        <test-method status="PASS" signature="initMocks()[pri:0, instance:org.neptune.service.tests.TestNGDemo@4566e5bd]" name="initMocks" is-config="true" duration-ms="0" started-at="2017-11-28T17:38:36Z" finished-at="2017-11-28T17:38:36Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initMocks -->
+        <test-method status="PASS" signature="save_invalidLastName_Test(org.neptune.dto.UserInputDto)[pri:0, instance:org.neptune.service.tests.TestNGDemo@4566e5bd]" name="save_invalidLastName_Test" duration-ms="2" started-at="2017-11-28T17:38:36Z" data-provider="dataProviderMethod1" finished-at="2017-11-28T17:38:36Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.neptune.dto.UserInputDto@45d2ade3]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- save_invalidLastName_Test -->
+        <test-method status="PASS" signature="initMocks()[pri:0, instance:org.neptune.service.tests.TestNGDemo@4566e5bd]" name="initMocks" is-config="true" duration-ms="1" started-at="2017-11-28T17:38:36Z" finished-at="2017-11-28T17:38:36Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initMocks -->
+        <test-method status="PASS" signature="save_invalidUserId_Test(org.neptune.dto.UserInputDto)[pri:0, instance:org.neptune.service.tests.TestNGDemo@4566e5bd]" name="save_invalidUserId_Test" duration-ms="1" started-at="2017-11-28T17:38:36Z" data-provider="dataProviderMethod1" finished-at="2017-11-28T17:38:36Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.neptune.dto.UserInputDto@5c45d770]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- save_invalidUserId_Test -->
+        <test-method status="PASS" signature="initMocks()[pri:0, instance:org.neptune.service.tests.TestNGDemo@4566e5bd]" name="initMocks" is-config="true" duration-ms="1" started-at="2017-11-28T17:38:36Z" finished-at="2017-11-28T17:38:36Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initMocks -->
+        <test-method status="PASS" signature="save_invalidUserType_Test(org.neptune.dto.UserInputDto)[pri:0, instance:org.neptune.service.tests.TestNGDemo@4566e5bd]" name="save_invalidUserType_Test" duration-ms="1" started-at="2017-11-28T17:38:36Z" data-provider="dataProviderMethod1" finished-at="2017-11-28T17:38:36Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.neptune.dto.UserInputDto@7cbd9d24]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- save_invalidUserType_Test -->
+      </class> <!-- org.neptune.service.tests.TestNGDemo -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

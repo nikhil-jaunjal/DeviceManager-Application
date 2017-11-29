@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
+    <classes>
+      <class name="org.neptune.service.tests.TestNGDemo">
+        <methods>
+          <include name="save_UserAlreadyExistsException_Test" invocation-numbers="0"/>
+          <include name="save_invalidUserId_Test" invocation-numbers="0"/>
+          <include name="save_invalidFirstName_Test" invocation-numbers="0"/>
+          <include name="save_invalidLastName_Test" invocation-numbers="0"/>
+          <include name="save_invalidUserType_Test" invocation-numbers="0"/>
+          <include name="save_invalidEmail_Test" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- org.neptune.service.tests.TestNGDemo -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->
