@@ -1,8 +1,11 @@
 package org.neptune.service;
 
+import java.util.List;
+
 import org.neptune.dto.DeviceUsageDto;
 import org.neptune.dto.DeviceUsageInputDto;
 import org.neptune.exception.DataNotFoundException;
+import org.neptune.exception.DeviceAlreadyInUseException;
 import org.neptune.exception.UsageNotFoundException;
 import org.neptune.mapper.DozerBeanMapper;
 import org.neptune.model.DeviceEntity;
@@ -39,6 +42,11 @@ public class DeviceUsageService implements DeviceUsageServiceInterface
 		if (userEntity == null || deviceEntity == null)
 		{
 			throw new DataNotFoundException();
+		}
+		List<DeviceUsage> usageList = deviceUsageRepo.findDeviceIsInUse(deviceUsageInDto.getDeviceId());
+		if (!(usageList.isEmpty()))
+		{
+			throw new DeviceAlreadyInUseException();
 		}
 		DeviceUsage deviceUsage = mapper.map(deviceUsageInDto, DeviceUsage.class);
 		deviceUsage.setUser(userEntity);

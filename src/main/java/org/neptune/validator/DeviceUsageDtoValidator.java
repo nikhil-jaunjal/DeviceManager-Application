@@ -36,7 +36,11 @@ public class DeviceUsageDtoValidator
 
 	public void checkDates(Date startDate, Date endDate)
 	{
-		if (startDate.compareTo(endDate) > 0)
+		if (startDate != null && endDate != null && startDate.compareTo(endDate) > 0)
+		{
+			throw new InvalidDateException();
+		}
+		if (startDate == null)
 		{
 			throw new InvalidDateException();
 		}

@@ -23,7 +23,7 @@ public class DeviceUsage
 	@Column(name = "usage_start_date")
 	private Date startDate;
 
-	@Column(name = "usage_end_date")
+	@Column(name = "usage_end_date", nullable = true)
 	private Date endDate;
 
 	@ManyToOne
