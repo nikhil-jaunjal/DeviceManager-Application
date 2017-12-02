@@ -42,10 +42,7 @@ public class DeviceService implements DeviceServiceInterface
 		DeviceEntity deviceEntity = mapper.map(deviceInDto, DeviceEntity.class);
 		deviceRepo.save(deviceEntity);
 		deviceEntity = deviceRepo.findOne(deviceEntity.getDeviceId());
-		DeviceOutDto deviceOutDto = mapper.map(deviceEntity, DeviceOutDto.class);
-		deviceOutDto.setState(setEnumValueOfKey(deviceEntity.getState()));
-
-		return deviceOutDto;
+		return (mapper.map(deviceEntity, DeviceOutDto.class));
 	}
 
 	@Override
@@ -59,10 +56,7 @@ public class DeviceService implements DeviceServiceInterface
 		DeviceEntity deviceEntity = mapper.map(deviceUpdateDto, DeviceEntity.class);
 		deviceRepo.save(deviceEntity);
 		deviceEntity = deviceRepo.findOne(deviceId);
-		DeviceOutDto deviceOutDto = mapper.map(deviceEntity, DeviceOutDto.class);
-		deviceOutDto.setState(setEnumValueOfKey(deviceEntity.getState()));
-
-		return deviceOutDto;
+		return (mapper.map(deviceEntity, DeviceOutDto.class));
 	}
 
 	@Override
@@ -78,10 +72,7 @@ public class DeviceService implements DeviceServiceInterface
 	{
 		DeviceEntity deviceEntity = deviceRepo.findOne(id);
 		validator.isEmptyEntity(deviceEntity);
-		DeviceOutDto deviceOutDto = mapper.map(deviceEntity, DeviceOutDto.class);
-		deviceOutDto.setState(setEnumValueOfKey(deviceEntity.getState()));
-
-		return deviceOutDto;
+		return (mapper.map(deviceEntity, DeviceOutDto.class));
 	}
 
 	@Override
@@ -114,7 +105,7 @@ public class DeviceService implements DeviceServiceInterface
 		return deviceCustomOutDtoList;
 	}
 
-	public List<DeviceOutDto> findDevices(String type, Integer state)
+	public List<DeviceOutDto> findDevices(String type, DeviceState state)
 	{
 		List<DeviceEntity> deviceEntityList;
 		if (type == null && state == null)
@@ -134,22 +125,8 @@ public class DeviceService implements DeviceServiceInterface
 		for (DeviceEntity deviceEntity : deviceEntityList)
 		{
 			DeviceOutDto dto = mapper.map(deviceEntity, DeviceOutDto.class);
-			dto.setState(setEnumValueOfKey(deviceEntity.getState()));
 			deviceDtoList.add(dto);
 		}
 		return deviceDtoList;
-	}
-
-	public String setEnumValueOfKey(Integer key)
-	{
-		String value = "";
-		for (DeviceState s : DeviceState.values())
-		{
-			if (s.getKey() == key)
-			{
-				value = s.getValue();
-			}
-		}
-		return value;
 	}
 }

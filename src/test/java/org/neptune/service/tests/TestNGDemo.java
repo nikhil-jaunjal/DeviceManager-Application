@@ -14,7 +14,6 @@ import org.neptune.exception.InvalidEmailIdException;
 import org.neptune.exception.InvalidFirstNameException;
 import org.neptune.exception.InvalidLastNameException;
 import org.neptune.exception.InvalidUserIdException;
-import org.neptune.exception.InvalidUserTypeException;
 import org.neptune.exception.UserAlreadyExistsException;
 import org.neptune.model.UserEntity;
 import org.neptune.repository.DeviceDAO;
@@ -110,24 +109,6 @@ public class TestNGDemo
 		} catch (Exception e)
 		{
 			if (e instanceof InvalidEmailIdException)
-			{
-			} else
-			{
-				fail("Test Failed !" + e.toString());
-			}
-		}
-	}
-
-	@Test(dataProvider = "dataProviderMethod1", dataProviderClass = UserDataProvider.class)
-	public void save_invalidUserType_Test(UserInputDto userInDto)
-	{
-		userInDto.setUserType(404);
-		try
-		{
-			userService.save(userInDto);
-		} catch (Exception e)
-		{
-			if (e instanceof InvalidUserTypeException)
 			{
 			} else
 			{

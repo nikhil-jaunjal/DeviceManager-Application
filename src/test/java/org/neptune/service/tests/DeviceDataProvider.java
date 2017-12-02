@@ -7,6 +7,7 @@ import java.util.Date;
 
 import org.neptune.dto.DeviceInputDto;
 import org.neptune.dto.DeviceUpdateDto;
+import org.neptune.enums.DeviceState;
 
 public class DeviceDataProvider
 {
@@ -17,7 +18,7 @@ public class DeviceDataProvider
 		deviceInDto.setDeviceName("MacBook Pro");
 		deviceInDto.setModelNumber("MBP2015JUN25");
 		deviceInDto.setDetails("working");
-		deviceInDto.setState(3);
+		deviceInDto.setState(DeviceState.IN_USE);
 		try
 		{
 			DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
@@ -40,7 +41,7 @@ public class DeviceDataProvider
 		updateDto.setDeviceName("abcd");
 		updateDto.setDeviceType("abcd");
 		updateDto.setModelNumber("68LKMNJF09");
-		updateDto.setState(1);
+		updateDto.setState(DeviceState.BRAND_NEW);
 		try
 		{
 			DateFormat df = new SimpleDateFormat("yyyy-mm-dd");

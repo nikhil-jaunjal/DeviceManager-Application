@@ -9,8 +9,8 @@ import org.junit.runner.RunWith;
 import org.neptune.dto.DeviceInputDto;
 import org.neptune.dto.DeviceOutDto;
 import org.neptune.dto.DeviceUpdateDto;
+import org.neptune.enums.DeviceState;
 import org.neptune.exception.DataNotFoundException;
-import org.neptune.exception.InvalidDeviceStateException;
 import org.neptune.exception.InvalidDeviceTypeException;
 import org.neptune.exception.InvalidModelNumberException;
 import org.neptune.mapper.DozerBeanMapper;
@@ -87,50 +87,7 @@ public class DeviceServiceTest
 		}
 	}
 
-	@Test
-	public void save_InvalidDeviceStateException_Test()
-	{
-		DeviceDataProvider deviceDataProvider = new DeviceDataProvider();
 
-		boolean flag = true;
-		DeviceInputDto deviceInputDto = deviceDataProvider.createDefaultInputDTOForSaveFunction();
-		deviceInputDto.setState(404);
-		try
-		{
-			deviceService.save(deviceInputDto);
-			flag = false;
-		} catch (Exception e)
-		{
-			if (e instanceof InvalidDeviceStateException)
-			{
-			} else if (e instanceof Exception)
-			{
-				fail("Test failed - untracked condition" + e.toString());
-			}
-		}
-		if (flag == false)
-		{
-			fail("Test failed - correct 'deviceState' given");
-		}
-	}
-
-	@Test
-	public void save_InvalidDeviceStateException_OutDto_Test()
-	{
-		DeviceDataProvider deviceDataProvider = new DeviceDataProvider();
-		DeviceInputDto deviceInputDto = deviceDataProvider.createDefaultInputDTOForSaveFunction();
-		DeviceEntity deviceEntity = mapper.map(deviceInputDto, DeviceEntity.class);
-		deviceRepo.save(deviceEntity);
-		deviceEntity = deviceRepo.findOne(deviceEntity.getDeviceId());
-		DeviceOutDto deviceOutDto = mapper.map(deviceEntity, DeviceOutDto.class);
-		deviceOutDto.setState(deviceService.setEnumValueOfKey(404));
-		if (deviceOutDto.getState().equals(""))
-		{
-		} else
-		{
-			fail("Test Failed - correct state given to test");
-		}
-	}
 
 	// ----------- negative test for Update()-------------
 
@@ -201,51 +158,7 @@ public class DeviceServiceTest
 		}
 	}
 
-	@Test
-	public void update_InvalidSateException_Test()
-	{
 
-		DeviceDataProvider deviceDataProvider = new DeviceDataProvider();
-
-		boolean flag = true;
-		DeviceUpdateDto deviceUpdateDto = deviceDataProvider.createDefaultUpdateDTOForUpdate();
-		deviceUpdateDto.setState(404);
-		try
-		{
-			deviceService.update(deviceUpdateDto, deviceUpdateDto.getDeviceId());
-			flag = false;
-		} catch (Exception e)
-		{
-			if (e instanceof InvalidDeviceStateException)
-			{
-			} else if (e instanceof Exception)
-			{
-				fail("Test failed - untracked condition");
-			}
-		}
-		if (flag == false)
-		{
-			fail("Test failed - correct 'Device State' given");
-		}
-	}
-
-	@Test
-	public void update_InvalidDeviceStateException_OutDto_Test()
-	{
-		DeviceDataProvider deviceDataProvider = new DeviceDataProvider();
-		DeviceUpdateDto deviceUpdateDto = deviceDataProvider.createDefaultUpdateDTOForUpdate();
-		DeviceEntity deviceEntity = mapper.map(deviceUpdateDto, DeviceEntity.class);
-		deviceRepo.save(deviceEntity);
-		deviceEntity = deviceRepo.findOne(deviceEntity.getDeviceId());
-		DeviceOutDto deviceOutDto = mapper.map(deviceEntity, DeviceOutDto.class);
-		deviceOutDto.setState(deviceService.setEnumValueOfKey(404));
-		if (deviceOutDto.getState().equals(""))
-		{
-		} else
-		{
-			fail("Test Failed - correct state given to test");
-		}
-	}
 
 	// ----------- negative test for delete()-------------
 
@@ -294,35 +207,18 @@ public class DeviceServiceTest
 	// --------- negative test for findDevices() ------------
 
 	@Test
-	public void findDevices_DataNotFoundForDeviceTypeException_Test()
-	{
-		try
-		{
-			deviceService.findDevices("123*%Laptop", 3);
-		} catch (Exception e)
-		{
-			if (e instanceof DataNotFoundException)
-			{
-			} else
-			{
-				fail("test failed! - valid 'DeviceType' given" + e.toString());
-			}
-		}
-	}
-
-	@Test
 	public void findDevices_DataNotFoundForStateException_Test()
 	{
 		try
 		{
-			deviceService.findDevices("Laptop", 404);
+			deviceService.findDevices("12345**", DeviceState.IN_USE);
 		} catch (Exception e)
 		{
 			if (e instanceof DataNotFoundException)
 			{
 			} else
 			{
-				fail("test failed! - valid 'State' given" + e.toString());
+				fail("test failed! - valid 'device type' given" + e.toString());
 			}
 		}
 	}

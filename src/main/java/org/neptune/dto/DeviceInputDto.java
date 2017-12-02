@@ -2,12 +2,14 @@ package org.neptune.dto;
 
 import java.util.Date;
 
+import org.neptune.enums.DeviceState;
+
 public class DeviceInputDto
 {
 	private String deviceType;
 	private String modelNumber;
 	private String deviceName;
-	private Integer state;
+	private DeviceState state;
 	private Date purchasedDate;
 	private String details;
 
@@ -41,12 +43,12 @@ public class DeviceInputDto
 		this.deviceName = deviceName;
 	}
 
-	public Integer getState()
+	public DeviceState getState()
 	{
 		return state;
 	}
 
-	public void setState(Integer state)
+	public void setState(DeviceState state)
 	{
 		this.state = state;
 	}

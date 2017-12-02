@@ -3,6 +3,7 @@ package org.neptune.validator;
 import java.util.List;
 
 import org.neptune.dto.UserInputDto;
+import org.neptune.enums.UserType;
 import org.neptune.exception.DataNotFoundException;
 import org.neptune.exception.InvalidEmailIdException;
 import org.neptune.exception.InvalidFirstNameException;
@@ -25,9 +26,11 @@ public class UserDtoValidator
 		checkUserType(userInDto.getUserType());
 	}
 
-	public void checkUserType(Integer userType)
+	public void checkUserType(UserType userType)
 	{
-		if (!(userType == 1 || userType == 2 || userType == 3))
+		if (!((userType.toString()).equals(UserType.END_USER.toString())
+				|| (userType.toString()).equals(UserType.DEVICE_ADMIN.toString())
+				|| (userType.toString()).equals(UserType.GLOBAL_ADMIN.toString())))
 		{
 			throw new InvalidUserTypeException();
 		}

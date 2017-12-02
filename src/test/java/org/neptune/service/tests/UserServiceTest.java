@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.neptune.dto.UserInputDto;
 import org.neptune.dto.UserOutDto;
+import org.neptune.enums.UserType;
 import org.neptune.exception.InvalidEmailIdException;
 import org.neptune.exception.InvalidFirstNameException;
 import org.neptune.exception.InvalidLastNameException;
@@ -170,56 +171,12 @@ public class UserServiceTest
 	}
 
 	@Test
-	public void saveUser_InvalidUserType_Test()
-	{
-		UserDataProvider userDataProvider = new UserDataProvider();
-		boolean flag = true;
-		UserInputDto userInputDto = userDataProvider.createDefaultInputDTForSaveFunction();
-		userInputDto.setUserType(-33);
-		try
-		{
-			userService.save(userInputDto);
-			flag = false;
-		} catch (Exception e)
-		{
-			if (e instanceof InvalidUserTypeException)
-			{
-			} else if (e instanceof Exception)
-			{
-				fail("Test failed - untracked condition" + e.toString());
-			}
-		}
-		if (flag == false)
-		{
-			fail("Test failed - correct 'User Type' given");
-		}
-	}
-
-	@Test
 	public void saveUser_UserAlreadyExistsException_Test()
 	{
 		UserEntity userEntity = userDao.findOne("nit9108067");
 		if (userEntity != null)
 		{
 			fail("UserAlreadyExistsTest failed!");
-		}
-	}
-
-	@Test
-	public void saveUser_setUserType_Test()
-	{
-		UserDataProvider userDataProvider = new UserDataProvider();
-		UserInputDto userInputDto = userDataProvider.createDefaultInputDTForSaveFunction();
-		UserEntity userEntity = mapper.map(userInputDto, UserEntity.class);
-		userDao.save(userEntity);
-		UserOutDto userOutDto = mapper.map(userEntity, UserOutDto.class);
-		userOutDto.setUserType(userService.setEnumValueOfKey(50));//
-
-		if (userOutDto.getUserType().equals(""))
-		{
-		} else
-		{
-			fail("Test Failed - correct userType given to test");
 		}
 	}
 
@@ -362,50 +319,6 @@ public class UserServiceTest
 		}
 	}
 
-	@Test
-	public void updateUser_InvalidUserType_Test()
-	{
-		UserDataProvider userDataProvider = new UserDataProvider();
-
-		boolean flag = true;
-		UserInputDto userInputDto = userDataProvider.createDefaultInputDTForUpdateFunction();
-		userInputDto.setUserType(404);
-		try
-		{
-			userService.update(userInputDto, userInputDto.getUserId());
-			flag = false;
-		} catch (Exception e)
-		{
-			if (e instanceof InvalidUserTypeException)
-			{
-			} else if (e instanceof Exception)
-			{
-				fail("Test failed - untracked condition" + e.toString());
-			}
-		}
-		if (flag == false)
-		{
-			fail("Test failed - correct 'UserType' given");
-		}
-	}
-
-	@Test
-	public void updateUser_setUserType_Test()
-	{
-		UserDataProvider userDataProvider = new UserDataProvider();
-		UserInputDto userInputDto = userDataProvider.createDefaultInputDTForUpdateFunction();
-		UserEntity userEntity = mapper.map(userInputDto, UserEntity.class);
-		userDao.save(userEntity);
-		UserOutDto userOutDto = mapper.map(userEntity, UserOutDto.class);
-		userOutDto.setUserType(userService.setEnumValueOfKey(404));//
-		if (userOutDto.getUserType().equals(""))
-		{
-		} else
-		{
-			fail("Test Failed - correct userType given to test");
-		}
-	}
-
 	// ------------- positive test for Delete() ---------------------
 	// @Test
 	// public void deleteUser_Test()
@@ -463,7 +376,7 @@ public class UserServiceTest
 	{
 		try
 		{
-			userService.findUsers("12rfrv", "lastName", 3);
+			userService.findUsers("12rfrv", "lastName", UserType.END_USER);
 		} catch (Exception e)
 		{
 			if (e instanceof InvalidFirstNameException)
@@ -481,7 +394,7 @@ public class UserServiceTest
 	{
 		try
 		{
-			userService.findUsers("firstName", "12*Name*&4", 3);
+			userService.findUsers("firstName", "12*Name*&4", UserType.END_USER);
 		} catch (Exception e)
 		{
 			if (e instanceof InvalidLastNameException)
@@ -495,31 +408,12 @@ public class UserServiceTest
 	}
 
 	@Test
-	public void findUsers_InvalidUserType_Test()
-	{
-		try
-		{
-			userService.findUsers("firstName", "lastname", 404);
-		} catch (Exception e)
-		{
-			if (e instanceof InvalidUserTypeException)
-			{
-			} else
-			{
-				fail("test failed! - valid 'UserType' given" + e.toString());
-			}
-		}
-
-	}
-
-	@Test
 	public void findUsers_SetUserType_Test()
 	{
 		try
 		{
 			UserDataProvider userDataProvider = new UserDataProvider();
 			UserOutDto userOutDto = userDataProvider.outDtoForFindUsers();
-			userOutDto.setUserType(userService.setEnumValueOfKey(404));
 		} catch (Exception e)
 		{
 			if (e instanceof InvalidUserTypeException)

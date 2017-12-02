@@ -1,12 +1,14 @@
 package org.neptune.dto;
 
+import org.neptune.enums.UserType;
+
 public class UserInputDto
 {
 	private String userId;
 	private String firstName;
 	private String lastName;
 	private String email;
-	private Integer userType;
+	private UserType userType;
 
 	public String getUserId()
 	{
@@ -48,12 +50,12 @@ public class UserInputDto
 		this.email = email;
 	}
 
-	public Integer getUserType()
+	public UserType getUserType()
 	{
 		return userType;
 	}
 
-	public void setUserType(Integer userType)
+	public void setUserType(UserType userType)
 	{
 		this.userType = userType;
 	}

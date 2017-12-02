@@ -6,6 +6,7 @@ import org.neptune.dto.DeviceCustomOutDto;
 import org.neptune.dto.DeviceInputDto;
 import org.neptune.dto.DeviceOutDto;
 import org.neptune.dto.DeviceUpdateDto;
+import org.neptune.enums.DeviceState;
 import org.neptune.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -54,7 +55,7 @@ public class DeviceController
 
 	@GetMapping
 	public List<DeviceOutDto> findDevices(@RequestParam(value = "type", required = false) String type,
-			@RequestParam(value = "state", required = false) Integer state)
+			@RequestParam(value = "state", required = false) DeviceState state)
 	{
 		return deviceService.findDevices(type, state);
 	}

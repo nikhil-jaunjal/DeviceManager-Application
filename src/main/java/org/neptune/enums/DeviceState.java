@@ -23,4 +23,16 @@ public enum DeviceState
 		return value;
 	}
 
+	public static DeviceState getEnumValue(Integer dbData)
+	{
+		for (DeviceState state : DeviceState.values())
+		{
+			if (dbData == state.key)
+			{
+				return state;
+			}
+		}
+		throw new IllegalArgumentException("Unknown Device State : " + dbData);
+	}
+
 }

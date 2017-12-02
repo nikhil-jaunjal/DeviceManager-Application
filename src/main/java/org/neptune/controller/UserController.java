@@ -5,6 +5,7 @@ import java.util.List;
 import org.neptune.dto.UserCustomOutDto;
 import org.neptune.dto.UserInputDto;
 import org.neptune.dto.UserOutDto;
+import org.neptune.enums.UserType;
 import org.neptune.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -48,7 +49,7 @@ public class UserController
 	@GetMapping
 	public List<UserOutDto> findUsers(@RequestParam(value = "firstname", required = false) String firstName,
 			@RequestParam(value = "lastname", required = false) String lastName,
-			@RequestParam(value = "type", required = false) Integer type)
+			@RequestParam(value = "type", required = false) UserType type)
 	{
 		return userService.findUsers(firstName, lastName, type);
 	}

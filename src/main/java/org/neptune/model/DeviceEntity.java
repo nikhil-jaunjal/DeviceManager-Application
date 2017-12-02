@@ -5,12 +5,16 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.neptune.converter.StateEnumConverter;
+import org.neptune.enums.DeviceState;
 
 @Entity
 @Table(name = "Device")
@@ -26,8 +30,11 @@ public class DeviceEntity
 	private String modelNumber;
 	@Column(name = "device_name")
 	private String deviceName;
+
+	@Convert(converter = StateEnumConverter.class)
 	@Column(name = "state")
-	private Integer state;
+	private DeviceState state;
+
 	@Column(name = "purchased_date")
 	private Date purchasedDate;
 	@Column(name = "details")
@@ -91,12 +98,12 @@ public class DeviceEntity
 		this.deviceName = deviceName;
 	}
 
-	public Integer getState()
+	public DeviceState getState()
 	{
 		return state;
 	}
 
-	public void setState(Integer state)
+	public void setState(DeviceState state)
 	{
 		this.state = state;
 	}

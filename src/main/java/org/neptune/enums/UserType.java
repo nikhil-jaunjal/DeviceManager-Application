@@ -23,4 +23,16 @@ public enum UserType
 		return value;
 	}
 
+	public static UserType getEnumValue(Integer dbData)
+	{
+		for (UserType type : UserType.values())
+		{
+			if (dbData == type.key)
+			{
+				return type;
+			}
+		}
+		throw new IllegalArgumentException("Unknown User Type : " + dbData);
+	}
+
 }

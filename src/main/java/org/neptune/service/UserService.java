@@ -47,9 +47,7 @@ public class UserService implements UserServiceInterface
 		}
 		userEntity = mapper.map(userInDto, UserEntity.class);
 		userRepo.save(userEntity);
-		UserOutDto userOutDto = mapper.map(userEntity, UserOutDto.class);
-		userOutDto.setUserType(setEnumValueOfKey(userEntity.getUserType()));
-		return userOutDto;
+		return (mapper.map(userEntity, UserOutDto.class));
 	}
 
 	@Override
@@ -63,9 +61,7 @@ public class UserService implements UserServiceInterface
 		validator.validate(userDto);
 		userEntity = mapper.map(userDto, UserEntity.class);
 		userRepo.save(userEntity);
-		UserOutDto userOutDto = mapper.map(userEntity, UserOutDto.class);
-		userOutDto.setUserType(setEnumValueOfKey(userEntity.getUserType()));
-		return userOutDto;
+		return (mapper.map(userEntity, UserOutDto.class));
 	}
 
 	@Override
@@ -81,7 +77,7 @@ public class UserService implements UserServiceInterface
 	}
 
 	@Override
-	public List<UserOutDto> findUsers(String firstName, String lastName, Integer type)
+	public List<UserOutDto> findUsers(String firstName, String lastName, UserType type)
 	{
 		List<UserEntity> userEntityList;
 		if (firstName == null && lastName == null && type == null)
@@ -125,7 +121,6 @@ public class UserService implements UserServiceInterface
 		for (UserEntity userEntity : userEntityList)
 		{
 			UserOutDto userOutDto = mapper.map(userEntity, UserOutDto.class);
-			userOutDto.setUserType(setEnumValueOfKey(userEntity.getUserType()));
 			userOutDtoList.add(userOutDto);
 		}
 		return userOutDtoList;
@@ -136,9 +131,7 @@ public class UserService implements UserServiceInterface
 	{
 		validator.checkUserId(userId);
 		UserEntity userEntity = userRepo.findOne(userId);
-		UserOutDto userOutDto = mapper.map(userEntity, UserOutDto.class);
-		userOutDto.setUserType(setEnumValueOfKey(userEntity.getUserType()));
-		return userOutDto;
+		return (mapper.map(userEntity, UserOutDto.class));
 	}
 
 	@Override
@@ -167,19 +160,6 @@ public class UserService implements UserServiceInterface
 			userCustomOutDtoList.add(customOutDto);
 		}
 		return userCustomOutDtoList;
-	}
-
-	public String setEnumValueOfKey(Integer key)
-	{
-		String value = "";
-		for (UserType t : UserType.values())
-		{
-			if (t.getKey() == key)
-			{
-				value = t.getValue();
-			}
-		}
-		return value;
 	}
 
 }

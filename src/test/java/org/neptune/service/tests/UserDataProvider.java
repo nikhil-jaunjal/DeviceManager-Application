@@ -2,6 +2,7 @@ package org.neptune.service.tests;
 
 import org.neptune.dto.UserInputDto;
 import org.neptune.dto.UserOutDto;
+import org.neptune.enums.UserType;
 import org.neptune.model.UserEntity;
 import org.testng.annotations.DataProvider;
 
@@ -30,7 +31,7 @@ public class UserDataProvider
 		userEntity.setFirstName("ashish");
 		userEntity.setLastName("B");
 		userEntity.setEmail("ab@gmail.com");
-		userEntity.setUserType(3);
+		userEntity.setUserType(UserType.END_USER);
 
 		return userEntity;
 	}
@@ -42,7 +43,7 @@ public class UserDataProvider
 		userInputDto.setFirstName("nik");
 		userInputDto.setLastName("jaunjal");
 		userInputDto.setEmail("nikhil.jaunjal@gmail.com");
-		userInputDto.setUserType(3);
+		userInputDto.setUserType(UserType.END_USER);
 		return userInputDto;
 	}
 
@@ -64,7 +65,7 @@ public class UserDataProvider
 		userInputDto.setFirstName("nikhil");
 		userInputDto.setLastName("jaunjal");
 		userInputDto.setEmail("nikhil.jaunjal@neptune-ubi.com");
-		userInputDto.setUserType(1);
+		userInputDto.setUserType(UserType.END_USER);
 		return userInputDto;
 	}
 

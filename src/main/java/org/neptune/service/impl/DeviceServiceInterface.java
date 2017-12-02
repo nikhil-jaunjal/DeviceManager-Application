@@ -6,6 +6,7 @@ import org.neptune.dto.DeviceCustomOutDto;
 import org.neptune.dto.DeviceInputDto;
 import org.neptune.dto.DeviceOutDto;
 import org.neptune.dto.DeviceUpdateDto;
+import org.neptune.enums.DeviceState;
 
 public interface DeviceServiceInterface
 {
@@ -19,5 +20,5 @@ public interface DeviceServiceInterface
 
 	public List<DeviceCustomOutDto> findUsersOfDevice(Integer deviceId);
 
-	public List<DeviceOutDto> findDevices(String type, Integer state);
+	public List<DeviceOutDto> findDevices(String type, DeviceState state);
 }

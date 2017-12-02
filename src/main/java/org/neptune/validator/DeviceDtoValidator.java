@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.neptune.dto.DeviceInputDto;
 import org.neptune.dto.DeviceUpdateDto;
+import org.neptune.enums.DeviceState;
 import org.neptune.exception.DataNotFoundException;
 import org.neptune.exception.InvalidDeviceIdException;
 import org.neptune.exception.InvalidDeviceStateException;
@@ -21,6 +22,7 @@ public class DeviceDtoValidator
 		checkState(deviceInDto.getState());
 		checkModel(deviceInDto.getModelNumber());
 	}
+
 	public void validateUpdateDto(DeviceUpdateDto deviceUpdateDto)
 	{
 		checkDeviceId(deviceUpdateDto.getDeviceId());
@@ -45,9 +47,12 @@ public class DeviceDtoValidator
 		}
 	}
 
-	public void checkState(Integer state)
+	public void checkState(DeviceState state)
 	{
-		if (!(state == 1 || state == 2 || state == 3 || state == 4))
+		if (!(state.toString().equals(DeviceState.BRAND_NEW.toString())
+				|| state.toString().equals(DeviceState.IN_USE.toString())
+				|| state.toString().equals(DeviceState.NOT_IN_USE.toString())
+				|| state.toString().equals(DeviceState.E_WASTE.toString())))
 		{
 			throw new InvalidDeviceStateException();
 		}

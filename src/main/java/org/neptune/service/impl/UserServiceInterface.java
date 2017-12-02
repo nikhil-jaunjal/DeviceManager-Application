@@ -5,6 +5,7 @@ import java.util.List;
 import org.neptune.dto.UserCustomOutDto;
 import org.neptune.dto.UserInputDto;
 import org.neptune.dto.UserOutDto;
+import org.neptune.enums.UserType;
 
 public interface UserServiceInterface
 {
@@ -14,7 +15,7 @@ public interface UserServiceInterface
 
 	public void delete(String id);
 
-	public List<UserOutDto> findUsers(String firstName, String lastName, Integer type);
+	public List<UserOutDto> findUsers(String firstName, String lastName, UserType type);
 
 	public UserOutDto findByUserId(String userId);
 
